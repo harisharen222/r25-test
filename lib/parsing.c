@@ -1,9 +1,20 @@
 #include <stdint.h>
 #include <parsing.h>
 #include <math.h>
+
+#define SBUS_MIN 1000
+#define SBUS_MAX 2000
+#define SABERTOOTH_MIN 0
+#define SABERTOOTH_MAX 255
 // implement interpolation here
 int interpolation(uint16_t channel) {
-	// write interpolation code here
+	
+        int interpolated_value = (int)(SABERTOOTH_MIN + 
+                                    (float)(channel - SBUS_MIN) / 
+                                    (SBUS_MAX - SBUS_MIN) * 
+                                    (SABERTOOTH_MAX - SABERTOOTH_MIN));
+        return interpolated_value;
+        
 }
 // creating 11 bit channel
 uint16_t *parse_buffer(uint8_t buff[]) { 
